@@ -1,0 +1,16 @@
+{
+    "name": "uniswap-v2",
+    "version": "0.1.0",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "author": "phpnikolov",
+    "license": "ISC",
+    "devDependencies": {
+        "typescript": "^3.7.4"
+    },
+    "dependencies": {
+        "erc20-list": "github:ethinit/erc20-list",
+        "web3": "^1.2.0"
+    },
+    "description": "SDK for Uniswap v2"
+}
