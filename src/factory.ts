@@ -1,5 +1,6 @@
 import { Token } from "erc20-list";
 import { Contract } from "web3-eth-contract";
+import { LiquidityPool } from "./liquidity-pool";
 import Web3 from "web3";
 
 const factoryAbi = require('../factory.abi.json');
@@ -11,8 +12,8 @@ export class Factory {
         this.contract = new web3.eth.Contract(factoryAbi, address);
     }
 
-    private liquidityPools: { [key: string]: Promise<Token | null> } = {};
-    public getLiquidityPool(tokenA: Token, tokenB: Token): Promise<Token | null> {
+    private liquidityPools: { [key: string]: Promise<LiquidityPool | null> } = {};
+    public getLiquidityPool(tokenA: Token, tokenB: Token): Promise<LiquidityPool | null> {
         let cacheKey = [tokenA.getAddress(), tokenB.getAddress()].sort().join(',');
 
         if (!this.liquidityPools[cacheKey]) {
@@ -21,7 +22,7 @@ export class Factory {
                     return null;
                 }
 
-                return Token.getInstance(this.web3, pairAddress);
+                return new LiquidityPool(this.web3, pairAddress);
             })
         }
 
