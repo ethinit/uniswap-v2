@@ -9,15 +9,17 @@ export declare class Router {
     readonly contract: Contract;
     supportFeeOnTransferTokens: boolean;
     constructor(web3: Web3, address: string);
-    private weth;
+    protected weth: Promise<Token>;
     getWeth(): Promise<Token>;
-    private factory;
+    protected factory: Promise<Factory>;
     getFactory(): Promise<Factory>;
     getAmountsOut(srcAmount: number, path: Token[]): Promise<number[]>;
-    private routes;
+    protected routes: [Token, Token][];
     addRoute(tokenA: Token, tokenB: Token): Promise<boolean>;
     getBestPath(srcAmount: number, srcToken: Token, dstToken: Token): Promise<Token[]>;
-    private paths;
+    protected paths: {
+        [key: string]: Token[][];
+    };
     getPaths(srcToken: Token, dstToken: Token): Promise<Token[][]>;
     protected _getPaths(srcToken: Token, dstToken: Token | undefined, maxHops: number, routes: [Token, Token][]): Token[][];
     swap(path: Token[], srcAmount: number, dstMinReturn: number, to: string, deadline?: number): Promise<TransactionConfig>;

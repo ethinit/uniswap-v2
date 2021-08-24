@@ -15,7 +15,7 @@ export class Router {
         this.contract = new this.web3.eth.Contract(routerAbi, address);
     }
 
-    private weth: Promise<Token>;
+    protected weth: Promise<Token>;
     getWeth(): Promise<Token> {
         if (!this.weth) {
             this.weth = this.contract.methods.WETH().call().then(wethAddr => Token.getInstance(this.web3, wethAddr));
@@ -24,7 +24,7 @@ export class Router {
         return this.weth;
     }
 
-    private factory: Promise<Factory>;
+    protected factory: Promise<Factory>;
     getFactory(): Promise<Factory> {
         if (!this.factory) {
             this.factory = this.contract.methods.factory().call().then(factoryAddress => new Factory(this.web3, factoryAddress));
@@ -52,7 +52,7 @@ export class Router {
             });
     }
 
-    private routes: [Token, Token][] = [];
+    protected routes: [Token, Token][] = [];
     async addRoute(tokenA: Token, tokenB: Token): Promise<boolean> {
         let lp: Token = await this.getFactory().then(factory => factory.getLiquidityPool(tokenA, tokenB));
 
@@ -99,7 +99,7 @@ export class Router {
         return bestPath;
     }
 
-    private paths: { [key: string]: Token[][] } = {};
+    protected paths: { [key: string]: Token[][] } = {};
     async getPaths(srcToken: Token, dstToken: Token): Promise<Token[][]> {
         let cacheKey = [srcToken.getAddress(), dstToken.getAddress(), this.maxHops].sort().join(',');
 
