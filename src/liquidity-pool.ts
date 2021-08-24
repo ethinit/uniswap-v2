@@ -1,5 +1,6 @@
 import { Token } from "erc20";
 import Web3 from "web3";
+import { Factory } from "./factory";
 const lpAbi = require('../liquidity-pool.abi.json')
 
 export class LiquidityPool extends Token {
@@ -23,6 +24,15 @@ export class LiquidityPool extends Token {
         }
 
         return this.tokenB;
+    }
+
+    private factory: Promise<Factory>;
+    public getFactory(): Promise<Factory> {
+        if (!this.factory) {
+            this.factory = this.contract.methods.factory().call().then(address => Factory.getInstance(this.web3, address));
+        }
+
+        return this.factory;
     }
 
     public async getReserves(): Promise<[number, number]> {
