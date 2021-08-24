@@ -21,7 +21,7 @@ class Router {
     }
     getFactory() {
         if (!this.factory) {
-            this.factory = this.contract.methods.factory().call().then(factoryAddress => new factory_1.Factory(this.web3, factoryAddress));
+            this.factory = this.contract.methods.factory().call().then(factoryAddress => factory_1.Factory.getInstance(this.web3, factoryAddress));
         }
         return this.factory;
     }

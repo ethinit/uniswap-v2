@@ -27,7 +27,7 @@ export class Router {
     protected factory: Promise<Factory>;
     getFactory(): Promise<Factory> {
         if (!this.factory) {
-            this.factory = this.contract.methods.factory().call().then(factoryAddress => new Factory(this.web3, factoryAddress));
+            this.factory = this.contract.methods.factory().call().then(factoryAddress => Factory.getInstance(this.web3, factoryAddress));
         }
 
         return this.factory;

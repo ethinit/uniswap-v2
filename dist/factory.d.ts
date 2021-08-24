@@ -5,7 +5,8 @@ import Web3 from "web3";
 export declare class Factory {
     private web3;
     contract: Contract;
-    constructor(web3: Web3, address: string);
+    protected constructor(web3: Web3, address: string);
+    static getInstance(web3: Web3, address: string): Factory;
     private liquidityPools;
     getLiquidityPool(tokenA: Token, tokenB: Token): Promise<LiquidityPool | null>;
 }

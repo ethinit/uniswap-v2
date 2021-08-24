@@ -9,6 +9,19 @@ class Factory {
         this.liquidityPools = {};
         this.contract = new web3.eth.Contract(factoryAbi, address);
     }
+    static getInstance(web3, address) {
+        if (!web3['ethinit']) {
+            web3['ethinit'] = {};
+        }
+        if (!web3['ethinit']['uniswap-v2']) {
+            web3['ethinit']['uniswap-v2'] = {};
+        }
+        address = address.toLowerCase();
+        if (!web3['ethinit']['uniswap-v2'][address]) {
+            web3['ethinit']['uniswap-v2'][address] = new Factory(web3, address);
+        }
+        return web3['ethinit']['uniswap-v2'][address];
+    }
     getLiquidityPool(tokenA, tokenB) {
         let cacheKey = [tokenA.getAddress(), tokenB.getAddress()].sort().join(',');
         if (!this.liquidityPools[cacheKey]) {
