@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LiquidityPool = exports.TokenList = exports.Token = exports.Router = exports.Dex = void 0;
+exports.Factory = exports.LiquidityPool = exports.TokenList = exports.Token = exports.Router = exports.Dex = void 0;
 const dex_1 = require("./dex");
 Object.defineProperty(exports, "Dex", { enumerable: true, get: function () { return dex_1.Dex; } });
 const router_1 = require("./router");
 Object.defineProperty(exports, "Router", { enumerable: true, get: function () { return router_1.Router; } });
+const factory_1 = require("./factory");
+Object.defineProperty(exports, "Factory", { enumerable: true, get: function () { return factory_1.Factory; } });
 const liquidity_pool_1 = require("./liquidity-pool");
 Object.defineProperty(exports, "LiquidityPool", { enumerable: true, get: function () { return liquidity_pool_1.LiquidityPool; } });
 const erc20_list_1 = require("erc20-list");
