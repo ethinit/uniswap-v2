@@ -4,8 +4,8 @@ import { Factory } from "./factory";
 const lpAbi = require('../liquidity-pool.abi.json')
 
 export class LiquidityPool extends Token {
-    constructor(protected web3: Web3, address: string) {
-        super(web3, address, lpAbi);
+    constructor(protected web3: Web3, address: string, abi = lpAbi) {
+        super(web3, address, abi);
     }
 
     private tokenA: Promise<Token>;

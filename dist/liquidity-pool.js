@@ -5,8 +5,8 @@ const erc20_1 = require("erc20");
 const factory_1 = require("./factory");
 const lpAbi = require('../liquidity-pool.abi.json');
 class LiquidityPool extends erc20_1.Token {
-    constructor(web3, address) {
-        super(web3, address, lpAbi);
+    constructor(web3, address, abi = lpAbi) {
+        super(web3, address, abi);
         this.web3 = web3;
     }
     getTokenA() {
