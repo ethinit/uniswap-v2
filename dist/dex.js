@@ -7,10 +7,8 @@ class Dex {
         this.web3 = web3;
         this.router = new router_1.Router(this.web3, routerAddr);
     }
-    async getPrice(srcAmount, srcToken, dstToken) {
-        return this.router.getBestPath(srcAmount, srcToken, dstToken).then(async (path) => {
-            return (await this.router.getAmountsOut(srcAmount, path)).pop();
-        });
+    getPrice(srcAmount, srcToken, dstToken) {
+        return this.router.getBestPath(srcAmount, srcToken, dstToken).then(path => this.router.getAmountsOut(srcAmount, path).then(amounts => amounts.pop()));
     }
     getRate(srcAmount, srcToken, dstToken) {
         return this.getPrice(srcAmount, srcToken, dstToken).then(price => price / srcAmount);

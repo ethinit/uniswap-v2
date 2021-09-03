@@ -11,10 +11,10 @@ export class Dex {
         this.router = new Router(this.web3, routerAddr);
     }
 
-    async getPrice(srcAmount: number, srcToken: Token, dstToken: Token): Promise<number> {
-        return this.router.getBestPath(srcAmount, srcToken, dstToken).then(async (path: Token[]) => {
-            return (await this.router.getAmountsOut(srcAmount, path)).pop();
-        });  
+    getPrice(srcAmount: number, srcToken: Token, dstToken: Token): Promise<number> {
+        return this.router.getBestPath(srcAmount, srcToken, dstToken).then(path =>
+            this.router.getAmountsOut(srcAmount, path).then(amounts => amounts.pop())
+        );
     }
 
     getRate(srcAmount: number, srcToken: Token, dstToken: Token): Promise<number> {
