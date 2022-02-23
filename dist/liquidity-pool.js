@@ -1,23 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LiquidityPool = void 0;
-const erc20_1 = require("erc20");
+const erc20_list_1 = require("erc20-list");
 const factory_1 = require("./factory");
 const lpAbi = require('../liquidity-pool.abi.json');
-class LiquidityPool extends erc20_1.Token {
+class LiquidityPool extends erc20_list_1.Token {
     constructor(web3, address, abi = lpAbi) {
         super(web3, address, abi);
         this.web3 = web3;
     }
     getTokenA() {
         if (!this.tokenA) {
-            this.tokenA = this.contract.methods.token0().call().then(address => erc20_1.Token.getInstance(this.web3, address));
+            this.tokenA = this.contract.methods.token0().call().then(address => erc20_list_1.Token.getInstance(this.web3, address));
         }
         return this.tokenA;
     }
     getTokenB() {
         if (!this.tokenB) {
-            this.tokenB = this.contract.methods.token1().call().then(address => erc20_1.Token.getInstance(this.web3, address));
+            this.tokenB = this.contract.methods.token1().call().then(address => erc20_list_1.Token.getInstance(this.web3, address));
         }
         return this.tokenB;
     }

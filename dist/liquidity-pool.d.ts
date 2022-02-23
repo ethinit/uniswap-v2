@@ -1,14 +1,14 @@
-import { Token } from "erc20";
+import { Token } from "erc20-list";
 import Web3 from "web3";
 import { Factory } from "./factory";
 export declare class LiquidityPool extends Token {
     protected web3: Web3;
     constructor(web3: Web3, address: string, abi?: any);
-    private tokenA;
+    protected tokenA: Promise<Token>;
     getTokenA(): Promise<Token>;
-    private tokenB;
+    protected tokenB: Promise<Token>;
     getTokenB(): Promise<Token>;
-    private factory;
+    protected factory: Promise<Factory>;
     getFactory(): Promise<Factory>;
     getReserves(): Promise<[number, number]>;
 }

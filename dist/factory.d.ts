@@ -7,6 +7,8 @@ export declare class Factory {
     contract: Contract;
     protected constructor(web3: Web3, address: string);
     static getInstance(web3: Web3, address: string): Factory;
-    private liquidityPools;
+    protected liquidityPools: {
+        [key: string]: Promise<LiquidityPool | null>;
+    };
     getLiquidityPool(tokenA: Token, tokenB: Token): Promise<LiquidityPool | null>;
 }

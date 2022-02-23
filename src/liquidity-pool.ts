@@ -1,4 +1,4 @@
-import { Token } from "erc20";
+import { Token } from "erc20-list";
 import Web3 from "web3";
 import { Factory } from "./factory";
 const lpAbi = require('../liquidity-pool.abi.json')
@@ -8,7 +8,7 @@ export class LiquidityPool extends Token {
         super(web3, address, abi);
     }
 
-    private tokenA: Promise<Token>;
+    protected tokenA: Promise<Token>;
     public getTokenA(): Promise<Token> {
         if (!this.tokenA) {
             this.tokenA = this.contract.methods.token0().call().then(address => Token.getInstance(this.web3, address));
@@ -17,7 +17,7 @@ export class LiquidityPool extends Token {
         return this.tokenA;
     }
 
-    private tokenB: Promise<Token>;
+    protected tokenB: Promise<Token>;
     public getTokenB(): Promise<Token> {
         if (!this.tokenB) {
             this.tokenB = this.contract.methods.token1().call().then(address => Token.getInstance(this.web3, address));
@@ -26,7 +26,7 @@ export class LiquidityPool extends Token {
         return this.tokenB;
     }
 
-    private factory: Promise<Factory>;
+    protected factory: Promise<Factory>;
     public getFactory(): Promise<Factory> {
         if (!this.factory) {
             this.factory = this.contract.methods.factory().call().then(address => Factory.getInstance(this.web3, address));

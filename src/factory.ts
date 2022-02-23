@@ -29,7 +29,7 @@ export class Factory {
         return web3['ethinit']['uniswap-v2'][address];
     }
 
-    private liquidityPools: { [key: string]: Promise<LiquidityPool | null> } = {};
+    protected liquidityPools: { [key: string]: Promise<LiquidityPool | null> } = {};
     public getLiquidityPool(tokenA: Token, tokenB: Token): Promise<LiquidityPool | null> {
         let cacheKey = [tokenA.getAddress(), tokenB.getAddress()].sort().join(',');
 
