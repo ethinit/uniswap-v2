@@ -8,8 +8,8 @@ const factoryAbi = require('../factory.abi.json');
 export class Factory {
     public contract: Contract;
 
-    protected constructor(private web3: Web3, address: string) {
-        this.contract = new web3.eth.Contract(factoryAbi, address);
+    protected constructor(private web3: Web3, address: string, abi = factoryAbi) {
+        this.contract = new web3.eth.Contract(abi, address);
     }
 
     static getInstance(web3: Web3, address: string): Factory {

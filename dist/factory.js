@@ -4,10 +4,10 @@ exports.Factory = void 0;
 const liquidity_pool_1 = require("./liquidity-pool");
 const factoryAbi = require('../factory.abi.json');
 class Factory {
-    constructor(web3, address) {
+    constructor(web3, address, abi = factoryAbi) {
         this.web3 = web3;
         this.liquidityPools = {};
-        this.contract = new web3.eth.Contract(factoryAbi, address);
+        this.contract = new web3.eth.Contract(abi, address);
     }
     static getInstance(web3, address) {
         if (!web3['ethinit']) {
